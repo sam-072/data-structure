@@ -1,3 +1,4 @@
+from collections import deque
 class TreeNode:
     def __init__(self,data):
         self.data=data
@@ -95,25 +96,32 @@ def searchBT(root,value):
     return -1
 
 # this function insert nodes at level order
-def insertBT():
-    a=input()
-    if a[0]!=-1:
-        root=TreeNode(a[0])
-        obj=Queue()
-        obj.enqueue(root)
-        print(root)
-    else:
+def insertBT(a):
+    if len(a)==0 or a[0]=='-1':
         return None
-    for i in range(1,len(a),2):
-        temp=obj.dequeue()
-        if a[i]!=-1:
-            newnode=TreeNode(a[i])
-            temp.left=newnode
-            obj.enqueue(newnode)
-        if a[i+1]!=-1:
-            newnode=TreeNode(a[i])
-            temp.right=newnode
-            obj.enqueue(newnode)
+    root=TreeNode(a[0])
+    size=0
+    q=deque()
+    q.append(root)
+    size+=1
+    i=1
+    while size>0 and i<len(a):
+        currnode=q.popleft()
+        size-=1
+        currval=a[i]
+        if currval!=-1:
+            currnode.left=TreeNode(currval)
+            q.append(currnode.left)
+            size+=1
+        i+=1
+        if i>=len(a):
+            break
+        currval=a[i]
+        if currval!=-1:
+            currnode.right=TreeNode(currval)
+            q.append(currnode.right)
+            size+=1
+        i+=1
     return root
 
 def sizeBT(root):
@@ -386,12 +394,12 @@ def buildTree(In, post):
 # root=buildTreePI(pre,io)
 # LevelOrderTraversal(root)
 # print(">>>>>>>>>>>>>>>>>>>>>>")
-post=[9,1,2,12,7,5,3,11,4,8]
-In=[9,5,1,7,2,12,8,4,3,11]
-root1=buildTree(In,post)
-print(root1)
-InOrderTraversal(root1)
-LevelOrderTraversal(root1)
+# post=[9,1,2,12,7,5,3,11,4,8]
+# In=[9,5,1,7,2,12,8,4,3,11]
+# root1=buildTree(In,post)
+# print(root1)
+# InOrderTraversal(root1)
+# LevelOrderTraversal(root1)
 
 
 # class BSTree:
@@ -453,5 +461,8 @@ if __name__ == '__main__':
     # print(isleaf(root))
     # print(sumleftleafs(root))
     # print(sumrightleafs(root))
-    print(isBlanced2(root))
-    print(diameter(root))
+    # print(isBlanced2(root))
+    # print(diameter(root))
+    t=buildTreePI([1,2,4,5,3], [4,2,5,1,3])
+    print(t)
+    LevelOrderTraversal(t)
