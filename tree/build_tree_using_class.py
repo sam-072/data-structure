@@ -98,6 +98,65 @@ class BinartTree:
                 q.append(temp.right)
         return -1
     
+    def DeepestNode(self):
+        if self.root is None:
+            return
+        q=deque()
+        q.append(self.root)
+        while len(q)>0:
+            temp=q.popleft()
+            if temp.left is not None:
+                q.append(temp.left)
+            if temp.right is not None:
+                q.append(temp.right)
+        return temp    # this will return the address of deepest Node
+    
+    def delDeepestNode(self,dp):
+        if self.root is None:
+            return 
+        q=deque()
+        q.append(self.root)
+        while len(q)>0:
+            temp=q.popleft()
+            if temp is dp:
+                dp=None
+                return 
+            if temp.right:
+                if temp.right is dp:
+                    temp.right=None
+                    return
+                else:
+                    q.append(temp.right)
+            if temp.left:
+                if temp.left is dp:
+                    temp.left=None
+                    return 
+                else:
+                    q.append(temp.left)
+    def deleteNode(self,x):
+        if self.root is None:
+            return -1
+        q=deque()
+        q.append(self.root)
+        while len(q)>0:
+            temp=q.popleft()
+            if temp.data==x:
+                dp=self.DeepestNode()
+                temp.data=dp.data
+                self.delDeepestNode(dp)
+                return 1
+            if temp.left != None:
+                q.append(temp.left)
+            if temp.right != None:
+                q.append(temp.right)
+        return -1
+
+    def deleteBT(self):
+        self.root.data=None
+        self.root.left=None
+        self.root.right=None
+
+
     def size(self):
         return self.curr_size
     
@@ -211,6 +270,18 @@ class BinartTree:
         re,rn=self.dia(root.right)
 
         return max(le,re)+1, max(rn,ln,le+re+1)
+    
+    def print_at_depthK(self,k):
+        l=[]
+        return self.depthk(self.root,k,l)
+    def depthk(self,root,k,l,d=0):
+        if root is None:
+            return 
+        if d==k:
+            l.append(root.data)
+        self.depthk(root.left, k,l,d+1)
+        self.depthk(root.right, k,l,d+1)
+        return l
 
 if __name__=='__main__':
     a=list(map(int,input().split()))
@@ -236,3 +307,9 @@ if __name__=='__main__':
     # print("after removing all leaf nodes :",bt.LevelOrderTraversal())
     print("tree is balned:",bt.isBalnced())
     print("diameter of binary tree:", bt.diameter())
+    print("print nodes at depth",2,": ",bt.print_at_depthK(2))
+    print("deepest node:",bt.DeepestNode().data)
+    bt.deleteNode(2)
+    print("tree after deleting node 2",bt.LevelOrderTraversal())
+    bt.deleteBT()
+    print("deleting the binary tree:",bt.LevelOrderTraversal())
