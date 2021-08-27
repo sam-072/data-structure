@@ -54,6 +54,50 @@ class BST:
         
     def printTree(self):
         self.printH(self.root)
+
+    def deleteNode(self,data):
+        deleted,root=self.deleteH(self.root,data)
+        if deleted:
+            self.curr_size-=1
+        self.root=root
+        return deleted
+    def deleteH(self,root,data):
+        if root is None:
+            return False,None
+        if data<root.data:
+            deleted,newleft=self.deleteH(root.left, data)
+            root.left=newleft
+            return deleted,root
+        elif data > root.data:
+            deleted,newright=self.deleteH(root.right, data)
+            root.right=newright
+            return deleted,root
+        else:
+            if root.left is None and root.right is None:
+                return True,None
+            elif root.left != None and root.right==None:
+                return True,root.left
+            elif root.left==None and root.right!=None:
+                return True,root.right
+            else:
+                replacement=self.minBST(root.right)
+                # print("replaceent:",replacement)
+                root.data=replacement
+                deleted,newrightNode=self.deleteH(root.right, replacement)
+                root.right=newrightNode
+                return True,root
+    
+    def min(self):
+        
+        t= self.minBST(self.root)
+        print(t)
+
+    def minBST(self,root):
+        if root is None:
+            return 100000000   # postivie infinity
+        if root.left is None:
+            return root.data
+        self.minBST(root.left)
     
     
     
@@ -71,5 +115,8 @@ print(b.isPresent(11))
 print(b.isPresent(15))    
 print(b.isPresent(100))    
 b.printTree()    
+b.deleteNode(15)
+b.printTree()
+print(b.min())
 
 

@@ -23,4 +23,4 @@ def subsequence(s):
     return l
 
 if __name__=='__main__':
-    print(subsequence("abcd"))
+    print(subsequence(""))
