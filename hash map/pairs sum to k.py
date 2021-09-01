@@ -12,5 +12,6 @@ def no_of_pairs(a,k):
 
 if __name__=='__main__':
     a=list(map(int, input().split()))
-    k=int(input())
-    print(no_of_pairs(a, k))
+    b=list(map(int, input().split()))
+    # k=int(input())
+    print(check(a, b))

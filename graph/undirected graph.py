@@ -23,7 +23,9 @@ class Graph:
 
     def dfs(self):
         visited=[False for i in range(self.nVertices)]
-        self.__dfsHelper(0,visited)
+        for i in range(self.nVertices):
+            if visited[i] is False:
+                self.__dfsHelper(i,visited)
     
     def __dfsHelper(self,sv,visited):
         print(sv)
@@ -32,11 +34,10 @@ class Graph:
             if self.adjMatrix[sv][i]>0 and visited[i] is False:
                 self.__dfsHelper(i, visited)
 
-    def bfs(self):
+    def __bfsHelper(self,sv,visited):
         q=queue.Queue()
-        q.put(0)
-        visited=[False for i in range(self.nVertices)]
-        visited[0]=True
+        q.put(sv)
+        visited[sv]=True
         while q.empty() is False:
             u=q.get()
             print(u)
@@ -44,19 +45,47 @@ class Graph:
                 if self.adjMatrix[u][i]>0 and visited[i] is False:
                     q.put(i)
                     visited[i]=True
+    
+    def bfs(self):
+        visited=[False for i in range(self.nVertices)]
+        for i in range(self.nVertices):
+            if visited[i] is False:
+                self.__bfsHelper(i, visited)
+    
+    def hasPath(self,v1,v2):
+        visited=[False for i in range(self.nVertices)]
+        for i in range(self.nVertices):
+            if visited[i] is False:
+                path=(self.__hasPathHelper(v1,v2,visited))
+                if path:
+                    return True
+        return False
+    
+    def __hasPathHelper(self,v1,v2,visited):
+        visited[v1]=True
+        if v1==v2:
+            return True
+       
+        for i in range(self.nVertices):
+            if visited[i] is False and self.adjMatrix[v1][i]>0:
+                path=self.__hasPathHelper(i, v2, visited)
+                if path:
+                    return True
 
+        return False
 
 
 if __name__=='__main__':
-    g=Graph(5)
+    g=Graph(7)
     g.addEdge(0,1)
-    g.addEdge(1,3)
-    g.addEdge(0,2)
-    g.addEdge(2,3)
+    g.addEdge(0,3)
     g.addEdge(2,4)
-    print(g)
-    g.dfs()
-    print()
-    g.bfs()
-    print(g.containEdge(3, 2))
-    print(g.containEdge(3, 3))
+    g.addEdge(2,5)
+    g.addEdge(5,6)
+    # print(g)
+    # g.dfs()
+    # print()
+    # g.bfs()
+    # print(g.containEdge(3, 2))
+    # print(g.containEdge(0, 6))
+    print(g.hasPath(3, 1))
