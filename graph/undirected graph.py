@@ -74,6 +74,28 @@ class Graph:
 
         return False
 
+    def getPath(self,v1,v2):
+        visited=[False for i in range(self.nVertices)]
+        for i in range(self.nVertices):
+            if visited[i] is False:
+                path=self.__getPathHelper(v1,v2,visited)
+                if path != None:
+                    return path
+        return path
+    
+    def __getPathHelper(self,v1,v2,visited):
+        visited[v1]=True
+        if self.adjMatrix[v1][v2]>0:
+            return [v2,v1]
+        for i in range(self.nVertices):
+            if visited[i] is False and self.adjMatrix[v1][i]>0:
+                path=self.__getPathHelper(i, v2, visited)
+                if path != None:
+                    path.append(v1)
+                    return path
+        return None
+
+
 
 if __name__=='__main__':
     g=Graph(7)
@@ -88,4 +110,5 @@ if __name__=='__main__':
     # g.bfs()
     # print(g.containEdge(3, 2))
     # print(g.containEdge(0, 6))
-    print(g.hasPath(3, 1))
+    # print(g.hasPath(3, 1))
+    print(g.getPath(1, 6))
