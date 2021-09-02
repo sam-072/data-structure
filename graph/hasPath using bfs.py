@@ -12,7 +12,7 @@ class Graph:
         visited=[False for i in range(self.nVertices)]
         for i in range(self.nVertices):
             if visited[i] is False:
-                path=self__hasPathHelper(v1,v2,visited)
+                path=self.__hasPathHelper(v1,v2,visited)
                 if path:
                     return True
         return False
@@ -21,6 +21,22 @@ class Graph:
         q=queue.Queue()
         q.put(v1)
         visited[v1]=True
-        if v1==v2:
-            return True
+        while q.empty() is False:
+            front=q.get()
+            for i in range(self.nVertices):
+                if self.adjMatrix[front][i]>0 and visited[i] is False:
+                    q.put(i)
+                    visited[i]=True
+                    if i==v2:
+                        return True
+        return False
+
+if __name__=='__main__':
+    v,e=map(int,input().split())
+    g=Graph(v)
+    for i in range(e):
+        v1,v2=map(int, input().split())
+        g.addEdge(v1, v2)
+    v1,v2=map(int, input().split())
+    print(g.hasPath(v1, v2))
                 
