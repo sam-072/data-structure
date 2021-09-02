@@ -20,8 +20,9 @@ def longestsequence(a):
             if c>length:
                 length=c
                 startpoint=j+1
-            # print(length,c)
-    return startpoint,startpoint+length-1
+
+    # return startpoint,startpoint+length-1
+    return length
 
 if __name__=='__main__':
     a=list(map(int, input().split()))
