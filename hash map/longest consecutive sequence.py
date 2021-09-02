@@ -21,7 +21,10 @@ def longestsequence(a):
                 length=c
                 startpoint=j+1
 
+    # if we have to return the starting and ending point
     # return startpoint,startpoint+length-1
+    
+    # if we to return the length 
     return length
 
 if __name__=='__main__':
