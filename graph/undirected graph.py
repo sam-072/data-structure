@@ -108,6 +108,22 @@ class Graph:
             return l
         else:
             return None
+    
+    def isConnected(self):
+        visited=[False for i in range(self.nVertices)]
+        q=queue.Queue()
+        q.put(0)
+        visited[0]=True
+        while q.empty() is False:
+            u=q.get()
+            for i in range(self.nVertices):
+                if self.adjMatrix[u][i]>0 and visited[i] is False:
+                    q.put(i)
+                    visited[i]=True
+        
+        if False in visited:
+            return False
+        return True
 
 
 
@@ -125,4 +141,5 @@ if __name__=='__main__':
     # print(g.containEdge(3, 2))
     # print(g.containEdge(0, 6))
     # print(g.hasPath(3, 1))
-    print(g.getPath(2, 6))
+    # print(g.getPath(2, 6))
+    print(g.isConnected())
