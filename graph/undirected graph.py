@@ -81,19 +81,33 @@ class Graph:
                 path=self.__getPathHelper(v1,v2,visited)
                 if path != None:
                     return path
-        return path
+        return None
     
     def __getPathHelper(self,v1,v2,visited):
+        q=queue.Queue()
+        q.put(v1)
+        d=dict()
+        z=0
         visited[v1]=True
-        if self.adjMatrix[v1][v2]>0:
-            return [v2,v1]
-        for i in range(self.nVertices):
-            if visited[i] is False and self.adjMatrix[v1][i]>0:
-                path=self.__getPathHelper(i, v2, visited)
-                if path != None:
-                    path.append(v1)
-                    return path
-        return None
+        while q.empty() is False:
+            front=q.get()
+            for i in range(self.nVertices):
+                if self.adjMatrix[front][i]>0 and visited[i] is False:
+                    d[i]=d.get(i,front)
+                    q.put(i)
+                    visited[i]=True
+                    if i==v2:
+                        z=-1
+                        break
+            if z==-1:
+                break
+        if z==-1:
+            l=[v2]
+            while d.get(l[-1],-1)!=-1:
+                l.append(d[l[-1]])
+            return l
+        else:
+            return None
 
 
 
@@ -111,4 +125,4 @@ if __name__=='__main__':
     # print(g.containEdge(3, 2))
     # print(g.containEdge(0, 6))
     # print(g.hasPath(3, 1))
-    print(g.getPath(1, 6))
+    print(g.getPath(2, 6))
