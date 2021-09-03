@@ -124,8 +124,29 @@ class Graph:
         if False in visited:
             return False
         return True
-
-
+    
+    def ConnectedComponents(self):
+        visited=[False for i in range(self.nVertices)]
+        ans=[]
+        for i in range(self.nVertices):
+            if visited[i] is False:
+                path=self.__ConnectedComponentsHelper(i,visited,[])
+                if len(path) !=0:
+                    ans.append(path)
+        return ans
+    
+    def __ConnectedComponentsHelper(self,sv,visited,l):
+        q=queue.Queue()
+        q.put(sv)
+        visited[sv]=True
+        while q.empty() is False:
+            u=q.get()
+            l.append(u)
+            for i in range(self.nVertices):
+                if self.adjMatrix[u][i]>0 and visited[i] is False:
+                    q.put(i)
+                    visited[i]=True
+        return l
 
 if __name__=='__main__':
     g=Graph(7)
@@ -143,3 +164,4 @@ if __name__=='__main__':
     # print(g.hasPath(3, 1))
     # print(g.getPath(2, 6))
     print(g.isConnected())
+    print(g.ConnectedComponents())
