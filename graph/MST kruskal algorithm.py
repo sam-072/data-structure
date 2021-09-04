@@ -27,7 +27,7 @@
 # 0 1 3
 # 0 3 5
 
-
+# T.C = O(E log E ) + O(E*V)
 
 
 class Edge:
