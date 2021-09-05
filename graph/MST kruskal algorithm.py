@@ -55,7 +55,7 @@ def kruskal(edgeArray,v):
         if p1 != p2:
             output.append(curredge)
             count+=1
-            parent[curredge.v1]=curredge.v1
+            parent[p1]=p2
         i+=1
     return output
 
