@@ -43,10 +43,10 @@ class Graph:
                 minindex=i
         return minindex
     
-    def sortestPath(self):
+    def sortestPath(self,v):
         visited=self.nVertices*[False]
         distance=self.nVertices*[sys.maxsize]
-        distance[0]=0
+        distance[v]=0
         for i in range(self.nVertices-1):
             u=self.__minDist(distance,visited)
             visited[u]=True
@@ -67,5 +67,5 @@ if __name__=='__main__':
     for i in range(e):
         v1,v2,wt=map(int, input().split())
         g.addEdge(v1, v2,wt)        
-        
-    g.sortestPath()
+    v1=int(input())
+    g.sortestPath(v1)
