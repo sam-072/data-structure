@@ -64,7 +64,7 @@ if __name__=='__main__':
     edgeArray=[]
     for i in range(e):
         v1,v2,wt=map(int, input().split())
-        edgeArray.append(Edge(v1,v2,wt))
+        edgeArray.append(Edge(v1-1,v2-1,wt))
     output=kruskal(edgeArray,v)
     for edge in output:
         if edge.v1 <edge.v2:
