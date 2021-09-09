@@ -33,7 +33,6 @@ class Graph:
 
     def addEdge(self,v1,v2,wt=1):
         self.adjMatrix[v1][v2]=wt
-        self.adjMatrix[v2][v1]=wt
     
     def __minDist(self,distance,visited):
         mindis=sys.maxsize
