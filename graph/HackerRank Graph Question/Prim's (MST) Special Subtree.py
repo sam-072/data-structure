@@ -5,8 +5,9 @@ class Graph:
         self.adjMatrix=[[0 for i in range(nVertices)] for j in range(nVertices)]
         # the adjgency matrix will contains the vertices from 0 to nVertices - 1
 
-    def addEdge(self,v1,v2,wt=1):
+    def addEdge(self,v1,v2,wt):
         self.adjMatrix[v1][v2]=wt
+        self.adjMatrix[v2][v1]=wt
     
     def __getMinVertex(self,visited,weight):
         min_v=-1
@@ -29,18 +30,16 @@ class Graph:
                     if weight[j] > self.adjMatrix[min_v][j]:
                         weight[j]=self.adjMatrix[min_v][j]
                         parent[j]=min_v
-        
-        for i in range(1,self.nVertices):
-            if i<parent[i]:
-                print(i,parent[i],weight[i])
-            else:
-                print(parent[i],i,weight[i])
+        c=0
+        for i in range(self.nVertices):
+            c+=weight[i]
+        return c
 
 if __name__=='__main__':
     v,e=map(int, input().split())
     g=Graph(v)
     for i in range(e):
         v1,v2,wt=map(int, input().split())
-        g.addEdge(v1, v2,wt)        
+        g.addEdge(v1-1, v2-1,wt)        
     v1=int(input())    
-    g.prims(v1)
+    print(g.prims(v1-1))
