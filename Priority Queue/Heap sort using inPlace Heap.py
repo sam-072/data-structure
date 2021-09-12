@@ -24,7 +24,7 @@ def HeapSort(arr):
         HeapifyDown(arr,i,n)
 
     # Remove the first element and add it to the last of array and call heapifyDown
-    # on the array from index 0 to length -1
+    # on the array from index 0 to i
 
     for i in range(n-1,0,-1):
         arr[0],arr[i] = arr[i],arr[0]
