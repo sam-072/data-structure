@@ -59,7 +59,7 @@ class BinartTree:
             l.extend(self.inordhelp(root.right))
         return l
 
-    def PreOrderTraversal(self):
+    def PostOrderTraversal(self):
         return self.posthelp(self.root)
     def posthelp(self,root):
         l=[]
@@ -287,10 +287,9 @@ if __name__=='__main__':
     a=list(map(int,input().split()))
     bt=BinartTree()
     bt.buildTree(a)
-    l=bt.PreOrderTraversal()
     print(bt.PreOrderTraversal())
     print(bt.inorderTraversal())
-    print(bt.PreOrderTraversal())
+    print(bt.PostOrderTraversal())
     print(bt.LevelOrderTraversal())
     print(bt.search(4))
     print(bt.search(7))
