@@ -32,4 +32,4 @@ def keypad(n):
     return l
 
 if __name__=='__main__':
-    print(keypad(234))    
+    print(keypad(24))    
