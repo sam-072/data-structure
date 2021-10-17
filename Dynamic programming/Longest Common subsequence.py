@@ -12,7 +12,7 @@ def LCS_R(i, j, s1, s2, dp):
     if s1[i] == s2[j]:
         if dp[i+1][j+1]==-1:
             c1 = LCS_R(i+1, j+1, s1, s2, dp)
-            dp[i+1][j+1] = c
+            dp[i+1][j+1] = c1
         else:
             c1 = dp[i+1][j+1]
         c = c1 + 1
