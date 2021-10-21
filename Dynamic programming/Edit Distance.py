@@ -1,6 +1,8 @@
 # Code by : Sam._.072
 
 # ------RECURSIVE APPROACH------
+# Time complexity : O(N*M)
+# Space complexity : O(N*M) for stack and O(N*M) for dp Array
 
 def distance_R(s1,s2,n,m):
     if n==0:
@@ -14,6 +16,8 @@ def distance_R(s1,s2,n,m):
     return 1 + min(distance_R(s1, s2, n, m-1), distance_R(s1, s2, n-1, m),distance_R(s1, s2, n-1, m-1))
 
 # ------ITERATIVE APPROACH------
+# Time complexity : O(N*M)
+# Space complexity : O(N*M) for dp Array
 
 def distance(s1,s2):
     n=len(s1)
