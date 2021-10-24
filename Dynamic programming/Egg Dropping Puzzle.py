@@ -17,7 +17,7 @@ import sys
 def Result_R(f, e):
     if e == 1:
         return f
-    if e == 1:
+    if f == 1:
         return 1
     if f == 0:
         return 0
