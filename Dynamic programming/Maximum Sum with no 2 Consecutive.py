@@ -23,8 +23,22 @@ def maxSum(arr):
         dp[i] = max(dp[i-1], dp[i-2]+arr[i-1])
     return dp[n]
 
+# Time Complexity : O(N)
+# Space Complexity : O(1)
+
+def maxSum1(arr):
+    n=len(arr)
+    prev_prev = arr[0]
+    prev = max(arr[0], arr[1])
+    for i in range(3,n+1):
+        temp = max(prev, arr[i-1]+prev_prev)
+        prev_prev = prev
+        prev = temp
+    return prev
+
 if __name__=='__main__':
     n=int(input())
     arr=list(map(int, input().split()))
     print(maxSum_R(arr, n))
     print(maxSum(arr))
+    print(maxSum1(arr))
