@@ -39,8 +39,33 @@ def minJumps(arr):
         return -1
     return dp[n-1]  
 
+# Time Complexity : O(N)
+# Space Complexity : O(1)
+
+def minJumps1(arr):
+    if len(arr) <= 1:
+        return 0
+    if arr[0] == 0:
+        return -1
+    maxJump = arr[0]
+    jump = 1
+    step = arr[0]
+    for i in range(1,len(arr)):
+        if i == len(arr)-1:
+            return jump
+        maxJump = max(maxJump, i+arr[i])
+        step -= 1
+        if step == 0:
+            jump += 1
+            if i >= maxJump:
+                return -1
+            step = maxJump - i
+
+
+
 if __name__=='__main__':
     n = int(input())
     arr = list(map(int, input().split()))
     print(minJumps_R(arr, n))
     print(minJumps(arr))
+    print(minJumps1(arr))
