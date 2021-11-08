@@ -13,10 +13,14 @@
 # c is the final pole or 3rd pole
 
 def tower_of_hanoi(n,a,b,c):
+    count=1
+    if n==0:
+        return 0
     if n>0:
-        tower_of_hanoi(n-1, a, c, b)
+        count+=tower_of_hanoi(n-1, a, c, b)
         print(a,c)
-        tower_of_hanoi(n-1, b, a, c)
+        count+=tower_of_hanoi(n-1, b, a, c)
+    return count
 
 if __name__=='__main__':
-    tower_of_hanoi(5, 1, 2, 3)
+    print(tower_of_hanoi(5, 1, 2, 3))
