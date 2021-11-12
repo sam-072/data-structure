@@ -12,6 +12,6 @@ def Parentheses(n):
     return list(s)
 
 l=Parentheses(4)
-l.sort()
+# l.sort()
 for i in l:
     print(i)
