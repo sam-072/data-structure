@@ -18,5 +18,6 @@ def permutation1(index, a, ans):
         permutation1(index+1, a, ans)
         a[i], a[index] = a[index], a[i]
 
+
 a = [2 ,1, 2, 3, 4, 5]
 print(uniquePerms(a, 6))
