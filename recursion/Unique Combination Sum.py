@@ -1,5 +1,7 @@
 # Code by : Sam._.072
 
+# Time Complexity : 2^N * K  (N = size of array and K is append ds in ans)
+
 def CombSum(index, a, t, ds, ans):
     if t == 0:
         ans.append(ds[::])
