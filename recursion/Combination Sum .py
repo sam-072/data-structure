@@ -1,23 +1,29 @@
 # Code by : Sam._.072
 
+# Time Complexity : 2^N * K
+
 def CombSum(si, n, a, t, ds, ans):
     if t == 0:
-        ans.append(list(ds))
+        ans.append(ds[:])
         # print(ans)
         return 
+    if si >= n:
+        return
+
     # pick the element
-    for i in range(si,n):
-        if t>=a[i]:
-            ds.append(a[i])
-            CombSum(i, n, a, t-a[i], ds, ans)
-            ds.remove(a[i])
+    if si < n and t >= a[si]:
+        ds.append(a[si])
+        CombSum(si, n, a, t-a[si], ds, ans)
+        ds.pop()
+    
+    # Don't Pick
+    CombSum(si+1, n, a, t, ds, ans)
       
 
 if __name__ == '__main__':
     n = int(input())
     a = list(map(int, input().split()))
     t = int(input())
-    a.sort()
     ds,ans = [], []
     CombSum(0, n, a, t, ds, ans)
     print(ans)
