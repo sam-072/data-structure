@@ -1,5 +1,7 @@
 # Code by : Sam._.072
 
+# Time Complexity : 2^N
+
 def subsetSum(index, a, sum, ans):
     if index >= len(a):
         ans.append(sum)
