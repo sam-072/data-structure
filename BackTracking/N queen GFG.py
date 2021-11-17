@@ -1,56 +1,42 @@
-def printPath(n):
-    board= [ [0 for i in range(n)] for j in range(n)]
-    return(printPathHelper(0,n,board,[]))
+# Code by : Sam._.072
 
-def printPathHelper(row,n,board,l):
-    if row==n:
-        l=[]
-        for i in range(n):
-            for j in range(n):
-                if board[j][i]==1:
-                    l.append(j+1)
-                    break
-        return l
-    
-    for col in range(n):
-        if isSafe(row,col,n,board):
-            board[row][col]=1
-            l1=(printPathHelper(row+1,n,board,l))
-            if len(l1)==n:
-                l.append(l1)
-            board[row][col]=0
-    return l
+def NQueen(N):
+    ds = [[0 for i in range(N)] for j in range(N)]
+    ans = []
+    Hc = [0 for i in range(N)]
+    Dc = [0 for i in range(2*N-1)]
+    Uc = [0 for i in range(2*N-1)]
+    Queens(0, N, ds, ans, Hc, Dc, Uc)
+    res = []
+    for i in ans:
+        temp =[]
+        for j in i:
+            temp.append(j.index(1)+1)
+        res.append(temp)
+    res.sort()
+    return res
 
-def isSafe(row,col,n,board):
+def Queens(col, N, ds, ans, Hc, Dc, Uc):
+    if col == N:
+        temp =[ele[:] for ele in ds]
+        ans.append(temp)
+        return
+    
+    for row in range(n):
+        if Hc[row] == 0 and Dc[row+col] == 0 and Uc[N-1+col-row] == 0:
+            ds[row][col] = 1
+            Hc[row] = 1
+            Dc[row+col] = 1
+            Uc[N-1+col-row] = 1
+            Queens(col+1, N, ds, ans, Hc, Dc, Uc)
+            ds[row][col] = 0
+            Hc[row] = 0
+            Dc[row+col] = 0
+            Uc[N-1+col-row] = 0
 
-    # vertical check
-    i = row -1
-    while i >=0:
-        if board[i][col]==1:
-            return False
-        i -= 1
-    
-    # left diagonal check
-    i = row -1
-    j = col -1
-    while i>=0 and j>=0:
-        if board[i][j]==1:
-            return False
-        i-=1
-        j-=1
-    
-    # right diagonal check
-    i=row - 1
-    j=col + 1
-    while i>=0 and j<n:
-        if board[i][j]==1:
-            return False
-        i-=1
-        j+=1
-    
-    return True
+
 
 
 if __name__=='__main__':
     n=int(input())
-    print(printPath(n))
+    print(NQueen(n))
