@@ -1,16 +1,19 @@
 # Code by : Sam._.072
 
-def perSpace(index, s, ds, ans):
+def perSpace(index, s, ans):
     if index >= len(s):
-        ans.append(ds[:])
+        # ans.append(s)
         return
     for i in range(index+1,len(s)):
-        temp = s[:i]+" "+s[i:]
-        ds.append(temp)
-        perSpace(i+1,s, ds, ans)
-        
+        s = s[:i]+" "+s[i:]
+        ans.append(s)
+        perSpace(i+1,s, ans)
+        s = s[:i]+s[i+1:]
 
-ds = []
-ans = []
-perSpace(0, "ABC", ds, ans)
-print(ans)
+if __name__ == '__main__':        
+    s=input()
+    ans = []
+    perSpace(0, s, ans)
+    ans.append(s)
+    ans.sort()
+    print(ans)
