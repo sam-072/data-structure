@@ -18,6 +18,8 @@ def delete(head, n):
     if fast is None:
         head = slow.next
         return head
+    else:
+        fast = fast.next
     while fast != None:
         fast = fast.next 
         slow = slow.next
@@ -44,5 +46,5 @@ node1.next = node2
 node2.next = node3
 node3.next = node4
 node4.next = node5
-head = delete(head, 5)
+head = delete(head, 3)
 printLL(head)
